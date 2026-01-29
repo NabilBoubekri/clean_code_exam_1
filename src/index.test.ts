@@ -20,9 +20,15 @@ describe("get points for a dice roll of Yams ", () => {
         expect(points).toBe(30);
     });
 
-    it("should return Grande suite (40) for a roll of [1, 2, 3, 4, 5]", () => {
+    it("should return Grande suite (40 points) for a roll of [1, 2, 3, 4, 5]", () => {
         const rolls = [[1, 2, 3, 4, 5]];
         const points = getYamsPoints(rolls);
         expect(points).toBe(40);
+    });
+
+    it("should return YAMS (50 points) for a roll of [5, 5, 5, 5, 5]", () => {
+        const rolls = [[5, 5, 5, 5, 5]];
+        const points = getYamsPoints(rolls);
+        expect(points).toBe(50);
     });
 });
