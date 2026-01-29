@@ -7,21 +7,27 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
+        var points = 0;
         if (isYams(roll)) {
-            totalPoints += 50;
+            points += 50;
         }
         else if(isGrandeSuite(roll)) {
-            totalPoints += GRANDE_SUITE_POINTS;
+            points += GRANDE_SUITE_POINTS;
         }
         else if (isCarre(roll)) {
-            totalPoints += CARRE_POINTS;
+            points += CARRE_POINTS;
         }
         else if (hasFull(frequency)) {
-            totalPoints += FULL_POINTS;
+            points += FULL_POINTS;
         }
         else if (isBrelan(roll)) {
-            totalPoints += BRELAN_POINTS;
+            points += BRELAN_POINTS;
         }
+        if (points === 0) {
+            points += roll.reduce((a, b) => a + b, 0);
+        }
+
+        totalPoints += points;
     }
     return totalPoints;
 }
