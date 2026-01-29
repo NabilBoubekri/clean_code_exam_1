@@ -2,6 +2,7 @@ const BRELAN_POINTS = 28;
 const CARRE_POINTS = 35;
 const FULL_POINTS = 30;
 const GRANDE_SUITE_POINTS = 40;
+const YAMS_POINTS = 50;
 
 export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
@@ -9,7 +10,7 @@ export function getYamsPoints(rolls: number[][]): number {
         const frequency = countDiceFrequency(roll);
         var rollPoints = 0;
         if (isYams(roll)) {
-            rollPoints += 50;
+            rollPoints += YAMS_POINTS;
         }
         else if(isGrandeSuite(roll)) {
             rollPoints += GRANDE_SUITE_POINTS;
@@ -77,5 +78,5 @@ function isChance(rollPoints: number): boolean {
 }
 
 function getChancePoints(roll: number[]): number {
-    return roll.reduce((a, b) => a + b, 0);
+    return roll.reduce((valueA, valueB) => valueA + valueB, 0);
 }
