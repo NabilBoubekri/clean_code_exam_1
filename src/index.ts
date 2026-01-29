@@ -7,27 +7,27 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        var points = 0;
+        var rollPoints = 0;
         if (isYams(roll)) {
-            points += 50;
+            rollPoints += 50;
         }
         else if(isGrandeSuite(roll)) {
-            points += GRANDE_SUITE_POINTS;
+            rollPoints += GRANDE_SUITE_POINTS;
         }
         else if (isCarre(roll)) {
-            points += CARRE_POINTS;
+            rollPoints += CARRE_POINTS;
         }
         else if (hasFull(frequency)) {
-            points += FULL_POINTS;
+            rollPoints += FULL_POINTS;
         }
         else if (isBrelan(roll)) {
-            points += BRELAN_POINTS;
+            rollPoints += BRELAN_POINTS;
         }
-        if (points === 0) {
-            points += roll.reduce((a, b) => a + b, 0);
+        if (isChance(rollPoints)) {
+            rollPoints += getChancePoints(roll);
         }
 
-        totalPoints += points;
+        totalPoints += rollPoints;
     }
     return totalPoints;
 }
@@ -70,4 +70,12 @@ function isGrandeSuite(roll: number[]): boolean {
 
 function isYams(roll: number[]): boolean {
     return roll.every(die => die === roll[0]);
+}
+
+function isChance(rollPoints: number): boolean {
+    return rollPoints === 0;
+}
+
+function getChancePoints(roll: number[]): number {
+    return roll.reduce((a, b) => a + b, 0);
 }
