@@ -1,12 +1,16 @@
 const BRELAN_POINTS = 28;
 const CARRE_POINTS = 35;
 const FULL_POINTS = 30;
+const GRANDE_SUITE_POINTS = 40;
 
 export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if (isCarre(roll)) {
+        if(roll[0] === 1 && roll[1] === 2 && roll[2] === 3 && roll[3] === 4 && roll[4] === 5) {
+            totalPoints += GRANDE_SUITE_POINTS;
+        }
+        else if (isCarre(roll)) {
             totalPoints += CARRE_POINTS;
         }
         else if (hasFull(frequency)) {
