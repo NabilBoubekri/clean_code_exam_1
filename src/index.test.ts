@@ -13,4 +13,10 @@ describe("get points for a dice roll of Yams ", () => {
         const points = getYamsPoints(rolls);
         expect(points).toBe(35);
     });
+
+    it("should return full (30 points) for a roll of [2, 2, 2, 5, 5]", () => {
+        const rolls = [[2, 2, 2, 5, 5]];
+        const points = getYamsPoints(rolls);
+        expect(points).toBe(30);
+    });
 });
