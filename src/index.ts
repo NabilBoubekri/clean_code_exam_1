@@ -2,7 +2,7 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if (Object.values(frequency).includes(3) && Object.values(frequency).includes(2)) {
+        if (hasFull(frequency)) {
             totalPoints += 30;
         }
         else if (isCarre(roll)) {
@@ -39,4 +39,9 @@ function hasThreeOfAKind(frequency: Record<number, number>): boolean {
 
 function hasFourOfAKind(frequency: Record<number, number>): boolean {
     return Object.values(frequency).some(count => count >= 4);
+}
+
+function hasFull(frequency: Record<number, number>): boolean {
+    const counts = Object.values(frequency);
+    return counts.includes(3) && counts.includes(2);
 }
