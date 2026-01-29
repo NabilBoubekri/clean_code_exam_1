@@ -7,7 +7,10 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if(isGrandeSuite(roll)) {
+        if (roll[0] === roll[1] && roll[0] === roll[2] && roll[0] === roll[3] && roll[0] === roll[4]) {
+            totalPoints += 50;
+        }
+        else if(isGrandeSuite(roll)) {
             totalPoints += GRANDE_SUITE_POINTS;
         }
         else if (isCarre(roll)) {
