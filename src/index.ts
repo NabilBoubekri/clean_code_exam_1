@@ -7,7 +7,7 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if(roll[0] === 1 && roll[1] === 2 && roll[2] === 3 && roll[3] === 4 && roll[4] === 5) {
+        if(isGrandeSuite(roll)) {
             totalPoints += GRANDE_SUITE_POINTS;
         }
         else if (isCarre(roll)) {
@@ -52,4 +52,9 @@ function hasFourOfAKind(frequency: Record<number, number>): boolean {
 function hasFull(frequency: Record<number, number>): boolean {
     const counts = Object.values(frequency);
     return counts.includes(3) && counts.includes(2);
+}
+
+function isGrandeSuite(roll: number[]): boolean {
+    const uniqueValues = Array.from(new Set(roll)).sort((a, b) => a - b);
+    return uniqueValues.length === 5 && uniqueValues[4]! - uniqueValues[0]! === 4;
 }
