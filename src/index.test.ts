@@ -37,4 +37,10 @@ describe("get points for a dice roll of Yams ", () => {
         const points = getYamsPoints(rolls);
         expect(points).toBe(19);
     });
+
+    it("should return Yams (50 points) + Brelan (28 points) = 78 points for a roll of [6, 6, 6, 6, 6] and [1, 1, 1, 2, 3]", () => {
+        const rolls = [[6, 6, 6, 6, 6], [1, 1, 1, 2, 3]];
+        const points = getYamsPoints(rolls);
+        expect(points).toBe(78);
+    });
 });
