@@ -2,10 +2,10 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if (Object.values(frequency).includes(4)) {
-            return 35;
+        if (isCarre(roll)) {
+            totalPoints += 35;
         }
-        if (isBrelan(roll)) {
+        else if (isBrelan(roll)) {
             totalPoints += 28;
         }
     }
@@ -15,6 +15,11 @@ export function getYamsPoints(rolls: number[][]): number {
 function isBrelan(roll: number[]): boolean {
     const diceFrequency = countDiceFrequency(roll);
     return hasThreeOfAKind(diceFrequency);
+}
+
+function isCarre(roll: number[]): boolean {
+    const diceFrequency = countDiceFrequency(roll);
+    return hasFourOfAKind(diceFrequency);
 }
 
 function countDiceFrequency(roll: number[]): Record<number, number> {
@@ -27,4 +32,8 @@ function countDiceFrequency(roll: number[]): Record<number, number> {
 
 function hasThreeOfAKind(frequency: Record<number, number>): boolean {
     return Object.values(frequency).some(count => count >= 3);
+}
+
+function hasFourOfAKind(frequency: Record<number, number>): boolean {
+    return Object.values(frequency).some(count => count >= 4);
 }
