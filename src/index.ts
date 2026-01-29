@@ -7,7 +7,7 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if (roll[0] === roll[1] && roll[0] === roll[2] && roll[0] === roll[3] && roll[0] === roll[4]) {
+        if (isYams(roll)) {
             totalPoints += 50;
         }
         else if(isGrandeSuite(roll)) {
@@ -60,4 +60,8 @@ function hasFull(frequency: Record<number, number>): boolean {
 function isGrandeSuite(roll: number[]): boolean {
     const uniqueValues = Array.from(new Set(roll)).sort((a, b) => a - b);
     return uniqueValues.length === 5 && uniqueValues[4]! - uniqueValues[0]! === 4;
+}
+
+function isYams(roll: number[]): boolean {
+    return roll.every(die => die === roll[0]);
 }
