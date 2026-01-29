@@ -2,7 +2,10 @@ export function getYamsPoints(rolls: number[][]): number {
     let totalPoints = 0;
     for (const roll of rolls) {
         const frequency = countDiceFrequency(roll);
-        if (isCarre(roll)) {
+        if (Object.values(frequency).includes(3) && Object.values(frequency).includes(2)) {
+            totalPoints += 30;
+        }
+        else if (isCarre(roll)) {
             totalPoints += 35;
         }
         else if (isBrelan(roll)) {
